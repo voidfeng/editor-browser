@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Editor Browser - 文件资源管理器演示</title>
+    <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        color: white;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .header {
+        text-align: center;
+        margin-bottom: 40px;
+      }
+
+      .header h1 {
+        font-size: 3rem;
+        margin-bottom: 10px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      }
+
+      .header p {
+        font-size: 1.2rem;
+        opacity: 0.9;
+      }
+
+      .features {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        margin-bottom: 40px;
+      }
+
+      .feature-card {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border-radius: 15px;
+        padding: 30px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        transition: transform 0.3s ease;
+      }
+
+      .feature-card:hover {
+        transform: translateY(-5px);
+      }
+
+      .feature-card h3 {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .feature-card ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      .feature-card li {
+        padding: 5px 0;
+        opacity: 0.9;
+      }
+
+      .feature-card li:before {
+        content: '✓ ';
+        color: #4caf50;
+        font-weight: bold;
+      }
+
+      .demo-section {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border-radius: 15px;
+        padding: 30px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        text-align: center;
+      }
+
+      .demo-section h2 {
+        margin-bottom: 20px;
+        font-size: 2rem;
+      }
+
+      .demo-instructions {
+        background: rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+        padding: 20px;
+        margin: 20px 0;
+        text-align: left;
+      }
+
+      .demo-instructions ol {
+        margin: 0;
+        padding-left: 20px;
+      }
+
+      .demo-instructions li {
+        margin: 10px 0;
+        line-height: 1.6;
+      }
+
+      .keyboard-shortcuts {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+        margin-top: 20px;
+      }
+
+      .shortcut {
+        background: rgba(0, 0, 0, 0.2);
+        padding: 10px;
+        border-radius: 8px;
+        text-align: center;
+      }
+
+      .shortcut-key {
+        background: rgba(255, 255, 255, 0.2);
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-family: monospace;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>🚀 Editor Browser</h1>
+        <p>带有VSCode风格文件资源管理器的浮动代码编辑器</p>
+      </div>
+
+      <div class="features">
+        <div class="feature-card">
+          <h3>📁 文件资源管理器</h3>
+          <ul>
+            <li>树形文件结构显示</li>
+            <li>文件夹展开/折叠</li>
+            <li>文件类型图标识别</li>
+            <li>文件大小显示</li>
+            <li>右键菜单支持</li>
+          </ul>
+        </div>
+
+        <div class="feature-card">
+          <h3>📝 多文件编辑</h3>
+          <ul>
+            <li>多文件标签页</li>
+            <li>文件切换</li>
+            <li>文件关闭功能</li>
+            <li>语法高亮自动识别</li>
+            <li>实时代码编辑</li>
+          </ul>
+        </div>
+
+        <div class="feature-card">
+          <h3>🎨 界面特性</h3>
+          <ul>
+            <li>VSCode风格设计</li>
+            <li>侧边栏切换</li>
+            <li>明暗主题切换</li>
+            <li>可拖拽窗口</li>
+            <li>响应式布局</li>
+          </ul>
+        </div>
+
+        <div class="feature-card">
+          <h3>⚡ 高级功能</h3>
+          <ul>
+            <li>代码执行</li>
+            <li>页面分析</li>
+            <li>搜索功能</li>
+            <li>键盘快捷键</li>
+            <li>输出面板</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="demo-section">
+        <h2>🎯 使用演示</h2>
+        <p>点击右上角的浮动按钮打开编辑器，体验全新的文件资源管理器功能！</p>
+
+        <div class="demo-instructions">
+          <h3>📋 使用步骤：</h3>
+          <ol>
+            <li><strong>打开编辑器</strong>：点击页面右上角的 📝 浮动按钮</li>
+            <li><strong>浏览文件</strong>：在左侧文件资源管理器中点击文件夹展开/折叠</li>
+            <li><strong>选择文件</strong>：点击文件名在编辑器中打开</li>
+            <li><strong>多文件编辑</strong>：打开多个文件，使用标签页切换</li>
+            <li><strong>运行代码</strong>：编写JavaScript代码后点击"运行"按钮</li>
+            <li><strong>切换主题</strong>：点击 🌙/☀️ 按钮切换明暗主题</li>
+            <li><strong>隐藏侧边栏</strong>：点击 📁 按钮切换侧边栏显示</li>
+          </ol>
+        </div>
+
+        <div class="keyboard-shortcuts">
+          <div class="shortcut">
+            <div class="shortcut-key">Ctrl + E</div>
+            <div>切换编辑器</div>
+          </div>
+          <div class="shortcut">
+            <div class="shortcut-key">Ctrl + Enter</div>
+            <div>运行代码</div>
+          </div>
+          <div class="shortcut">
+            <div class="shortcut-key">拖拽</div>
+            <div>移动窗口</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 这里会注入FloatingEditor组件 -->
+    <div id="floating-editor"></div>
+
+    <script>
+      // 模拟注入FloatingEditor组件的脚本
+      console.log('Editor Browser Demo Page Loaded')
+      console.log('在实际的Chrome扩展中，FloatingEditor组件会被注入到这个页面')
+
+      // 添加一些示例内容供分析
+      document.body.setAttribute('data-demo', 'true')
+
+      // 模拟一些交互
+      setTimeout(() => {
+        console.log('页面加载完成，可以开始使用编辑器了！')
+      }, 1000)
+    </script>
+  </body>
+</html>

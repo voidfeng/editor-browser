@@ -1,15 +1,24 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import CodeEditor from './components/CodeEditor.vue'
 
 const message = ref('Hello Chrome Extension!')
 const currentUrl = ref('')
+const code = ref(`// 欢迎使用 CodeMirror 编辑器
+function hello() {
+  console.log('Hello World!');
+}
+
+hello();`)
 
 // 获取当前标签页URL
-chrome.tabs?.query({ active: true, currentWindow: true }, (tabs) => {
-  if (tabs[0]?.url) {
-    currentUrl.value = tabs[0].url
-  }
-})
+if (typeof chrome !== 'undefined' && chrome.tabs) {
+  chrome.tabs.query({ active: true, currentWindow: true }, (tabs: chrome.tabs.Tab[]) => {
+    if (tabs[0]?.url) {
+      currentUrl.value = tabs[0].url
+    }
+  })
+}
 </script>
 
 <template>
@@ -28,6 +37,11 @@ chrome.tabs?.query({ active: true, currentWindow: true }, (tabs) => {
         <p class="url">{{ currentUrl }}</p>
       </div>
 
+      <div class="editor-section">
+        <h3>代码编辑器:</h3>
+        <CodeEditor v-model="code" language="javascript" theme="light" style="height: 200px" />
+      </div>
+
       <div class="actions">
         <button class="btn btn-primary" @click="message = 'Extension is working!'">测试按钮</button>
       </div>
@@ -37,8 +51,8 @@ chrome.tabs?.query({ active: true, currentWindow: true }, (tabs) => {
 
 <style scoped>
 .popup-container {
-  width: 320px;
-  min-height: 200px;
+  width: 500px;
+  min-height: 400px;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
@@ -68,6 +82,16 @@ chrome.tabs?.query({ active: true, currentWindow: true }, (tabs) => {
   padding: 12px;
   background: #f8f9fa;
   border-radius: 8px;
+}
+
+.editor-section {
+  margin-bottom: 16px;
+}
+
+.editor-section h3 {
+  margin: 0 0 8px 0;
+  font-size: 14px;
+  color: #495057;
 }
 
 .current-page h3 {

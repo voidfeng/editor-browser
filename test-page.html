@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="这是一个用于测试 metascraper 功能的示例页面" />
+    <meta name="author" content="Editor Browser Team" />
+    <meta name="keywords" content="测试, metascraper, 页面分析, Chrome扩展" />
+    <meta property="og:title" content="测试页面 - Editor Browser" />
+    <meta property="og:description" content="用于测试页面分析功能的示例页面" />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:image"
+      content="https://via.placeholder.com/1200x630/4F46E5/FFFFFF?text=Editor+Browser"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <title>测试页面 - Editor Browser Extension</title>
+    <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        line-height: 1.6;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background: #f8f9fa;
+      }
+      .container {
+        background: white;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        color: #4f46e5;
+      }
+      h2 {
+        color: #6366f1;
+        border-bottom: 2px solid #e5e7eb;
+        padding-bottom: 10px;
+      }
+      .highlight {
+        background: #fef3c7;
+        padding: 2px 6px;
+        border-radius: 4px;
+      }
+      .card {
+        background: #f3f4f6;
+        padding: 20px;
+        border-radius: 8px;
+        margin: 20px 0;
+        border-left: 4px solid #4f46e5;
+      }
+      img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+      }
+      .form-container {
+        background: #eff6ff;
+        padding: 20px;
+        border-radius: 8px;
+        margin: 20px 0;
+      }
+      input,
+      textarea,
+      select {
+        width: 100%;
+        padding: 8px 12px;
+        margin: 8px 0;
+        border: 1px solid #d1d5db;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+      button {
+        background: #4f46e5;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin: 5px;
+      }
+      button:hover {
+        background: #4338ca;
+      }
+      .footer {
+        text-align: center;
+        margin-top: 40px;
+        padding-top: 20px;
+        border-top: 1px solid #e5e7eb;
+        color: #6b7280;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>🚀 Editor Browser Extension 测试页面</h1>
+        <p>
+          这是一个专门用于测试 <span class="highlight">metascraper</span> 页面分析功能的示例页面。
+        </p>
+      </header>
+
+      <main>
+        <section>
+          <h2>📋 页面内容概览</h2>
+          <div class="card">
+            <p>本页面包含了各种 HTML 元素，用于测试页面分析器的提取能力：</p>
+            <ul>
+              <li>标题层级（H1-H6）</li>
+              <li>段落和文本内容</li>
+              <li>链接和图片</li>
+              <li>表单元素</li>
+              <li>元数据标签</li>
+            </ul>
+          </div>
+        </section>
+
+        <section>
+          <h2>🔗 链接示例</h2>
+          <p>这里有一些测试链接：</p>
+          <ul>
+            <li><a href="https://github.com" target="_blank" title="GitHub 官网">GitHub</a></li>
+            <li><a href="https://vuejs.org" title="Vue.js 官方文档">Vue.js 文档</a></li>
+            <li><a href="https://codemirror.net" title="CodeMirror 编辑器">CodeMirror</a></li>
+            <li><a href="#section1">页面内锚点链接</a></li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>🖼️ 图片示例</h2>
+          <img
+            src="https://via.placeholder.com/600x300/667eea/FFFFFF?text=Editor+Browser+Demo"
+            alt="Editor Browser 演示图片"
+            title="这是一个演示图片"
+          />
+          <p>上面是一个测试图片，用于验证图片元素的提取功能。</p>
+        </section>
+
+        <section id="section1">
+          <h2>📝 表单示例</h2>
+          <div class="form-container">
+            <form action="/submit" method="POST">
+              <h3>用户反馈表单</h3>
+
+              <label for="name">姓名 *</label>
+              <input type="text" id="name" name="name" placeholder="请输入您的姓名" required />
+
+              <label for="email">邮箱</label>
+              <input type="email" id="email" name="email" placeholder="your@email.com" />
+
+              <label for="category">反馈类型</label>
+              <select id="category" name="category">
+                <option value="bug">Bug 报告</option>
+                <option value="feature">功能建议</option>
+                <option value="general">一般反馈</option>
+              </select>
+
+              <label for="message">详细描述</label>
+              <textarea
+                id="message"
+                name="message"
+                rows="4"
+                placeholder="请详细描述您的反馈..."
+              ></textarea>
+
+              <button type="submit">提交反馈</button>
+              <button type="reset">重置表单</button>
+            </form>
+          </div>
+        </section>
+
+        <section>
+          <h2>📊 更多标题层级</h2>
+          <h3>这是 H3 标题</h3>
+          <p>这里是一些段落文本，用于测试文本内容的提取和字数统计功能。</p>
+
+          <h4>这是 H4 标题</h4>
+          <p>页面分析器会统计所有的文本内容，并计算预估的阅读时间。</p>
+
+          <h5>这是 H5 标题</h5>
+          <p>同时还会提取页面的结构化信息，如标题层级、链接、图片等。</p>
+
+          <h6>这是 H6 标题</h6>
+          <p>所有这些信息都会被整理成 JSON 格式，方便进一步处理和分析。</p>
+        </section>
+
+        <section>
+          <h2>🎯 使用说明</h2>
+          <div class="card">
+            <ol>
+              <li>确保已安装 Editor Browser 扩展</li>
+              <li>在页面右上角找到 📝 浮动按钮</li>
+              <li>点击按钮打开编辑器面板</li>
+              <li>点击 "🔍 分析页面" 按钮</li>
+              <li>查看生成的 JSON 数据和分析摘要</li>
+            </ol>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <p>&copy; 2024 Editor Browser Extension. 用于测试页面分析功能。</p>
+        <p>
+          本页面包含 <strong id="word-count">约 500</strong> 个字，预估阅读时间
+          <strong>3 分钟</strong>。
+        </p>
+      </footer>
+    </div>
+
+    <script>
+      // 一些测试用的 JavaScript
+      console.log('测试页面已加载')
+
+      // 动态更新字数统计
+      function updateWordCount() {
+        const text = document.body.textContent || ''
+        const wordCount = text.split(/\s+/).filter((word) => word.length > 0).length
+        const readingTime = Math.ceil(wordCount / 200)
+
+        const wordCountElement = document.getElementById('word-count')
+        if (wordCountElement) {
+          wordCountElement.textContent = `约 ${wordCount}`
+        }
+      }
+
+      // 页面加载完成后更新字数
+      document.addEventListener('DOMContentLoaded', updateWordCount)
+    </script>
+  </body>
+</html>

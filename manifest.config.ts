@@ -12,7 +12,7 @@ export default defineManifest({
   content_scripts: [
     {
       matches: ['<all_urls>'],
-      js: ['src/content-script.ts'],
+      js: ['src/content-app.ts'],
     },
   ],
 })
