@@ -60,6 +60,16 @@
         {{ isMinimized ? '🔼' : '🔽' }}
       </button>
 
+      <!-- 全屏 -->
+      <button
+        @click="$emit('toggle-fullscreen')"
+        class="control-btn w-6 h-6 rounded flex items-center justify-center text-xs transition-colors"
+        style="background: rgba(255, 255, 255, 0.2)"
+        title="全屏"
+      >
+        {{ isFullscreen ? '⊡' : '⊞' }}
+      </button>
+
       <!-- 关闭 -->
       <button
         @click="$emit('close')"
@@ -81,6 +91,7 @@ interface Props {
   language: 'javascript' | 'html' | 'css' | 'json' | 'markdown'
   isDarkTheme: boolean
   isMinimized: boolean
+  isFullscreen: boolean
 }
 
 defineProps<Props>()
@@ -91,6 +102,7 @@ defineEmits<{
   'toggle-sidebar': []
   'run-code': []
   'toggle-minimize': []
+  'toggle-fullscreen': []
   close: []
 }>()
 </script>

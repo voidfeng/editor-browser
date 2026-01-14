@@ -15,14 +15,25 @@
     <div
       v-if="isEditorVisible"
       class="editor-panel fixed rounded-xl overflow-hidden transition-all flex flex-col pointer-events-auto"
-      :class="{ minimized: isMinimized }"
-      :style="{
-        top: panelPosition.y + 'px',
-        left: panelPosition.x + 'px',
-        width: '900px',
-        height: isMinimized ? '50px' : '600px',
-        boxShadow: 'var(--vscode-shadow-lg)'
-      }"
+      :class="{ minimized: isMinimized, fullscreen: isFullscreen }"
+      :style="
+        isFullscreen
+          ? {
+              top: '0',
+              left: '0',
+              width: '100vw',
+              height: '100vh',
+              borderRadius: '0',
+              boxShadow: 'none'
+            }
+          : {
+              top: panelPosition.y + 'px',
+              left: panelPosition.x + 'px',
+              width: '900px',
+              height: isMinimized ? '50px' : '600px',
+              boxShadow: 'var(--vscode-shadow-lg)'
+            }
+      "
       @mousedown="startDrag"
     >
       <!-- 1. 顶部标题区域 -->
@@ -31,6 +42,7 @@
         :language="currentLanguage"
         :is-dark-theme="isDarkTheme"
         :is-minimized="isMinimized"
+        :is-fullscreen="isFullscreen"
         @update:language="
           (val) => (currentLanguage = val as 'javascript' | 'html' | 'css' | 'json' | 'markdown')
         "
@@ -38,6 +50,7 @@
         @toggle-sidebar="toggleSidebar"
         @run-code="runCode"
         @toggle-minimize="toggleMinimize"
+        @toggle-fullscreen="toggleFullscreen"
         @close="toggleEditor"
       />
 
@@ -74,6 +87,7 @@ import type { FileItem } from './FileExplorer.vue'
 // 编辑器状态
 const isEditorVisible = ref(false)
 const isMinimized = ref(false)
+const isFullscreen = ref(false)
 const isDarkTheme = ref(true)
 const isSidebarVisible = ref(true)
 
@@ -113,6 +127,16 @@ function toggleEditor() {
 
 function toggleMinimize() {
   isMinimized.value = !isMinimized.value
+  if (isMinimized.value) {
+    isFullscreen.value = false
+  }
+}
+
+function toggleFullscreen() {
+  isFullscreen.value = !isFullscreen.value
+  if (isFullscreen.value) {
+    isMinimized.value = false
+  }
 }
 
 function toggleTheme() {
@@ -406,6 +430,9 @@ function runCode() {
 
 // ========== 拖拽功能 ==========
 function startDrag(event: MouseEvent) {
+  // 全屏模式下不允许拖拽
+  if (isFullscreen.value) return
+
   // 只有点击标题栏才能拖拽
   const target = event.target as HTMLElement
   if (!target.closest('.vscode-titlebar')) return
