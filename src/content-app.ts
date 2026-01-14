@@ -1,6 +1,13 @@
 import { createApp } from 'vue'
 import FloatingEditor from './components/FloatingEditor.vue'
 
+// UnoCSS
+import 'virtual:uno.css'
+import '@unocss/reset/tailwind.css'
+
+// VS Code Theme
+import './styles/vscode-theme.css'
+
 // 创建编辑器容器
 function createEditorContainer() {
   const container = document.createElement('div')

@@ -81,7 +81,6 @@ function handleToggle() {
 
 function handleContextMenu(event: MouseEvent) {
   event.preventDefault()
-  // 这里可以添加右键菜单功能
   console.log('Right click on:', props.item.name)
 }
 
@@ -90,7 +89,6 @@ function getFileIcon(item: FileItem): string {
     return item.isExpanded ? '📂' : '📁'
   }
 
-  // 根据文件扩展名返回不同图标
   const ext = item.name.split('.').pop()?.toLowerCase()
 
   switch (ext) {
@@ -113,9 +111,7 @@ function getFileIcon(item: FileItem): string {
     case 'md':
       return '📝'
     case 'svg':
-      return '🖼️'
     case 'ico':
-      return '🖼️'
     case 'png':
     case 'jpg':
     case 'jpeg':
@@ -128,11 +124,9 @@ function getFileIcon(item: FileItem): string {
 
 function formatFileSize(bytes: number): string {
   if (bytes === 0) return '0 B'
-
   const k = 1024
   const sizes = ['B', 'KB', 'MB', 'GB']
   const i = Math.floor(Math.log(bytes) / Math.log(k))
-
   return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + ' ' + sizes[i]
 }
 </script>
@@ -147,20 +141,21 @@ function formatFileSize(bytes: number): string {
   align-items: center;
   height: 22px;
   cursor: pointer;
-  color: #24292f;
+  color: var(--vscode-text-primary);
   position: relative;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  transition: background-color 0.1s ease;
 }
 
 .node-content:hover {
-  background: #f1f3f4;
+  background: var(--vscode-list-hover-bg);
 }
 
 .node-content.is-selected {
-  background: #0969da;
-  color: white;
+  background: var(--vscode-list-active-bg);
+  color: var(--vscode-text-active);
 }
 
 .node-content.is-folder {
@@ -174,7 +169,7 @@ function formatFileSize(bytes: number): string {
   align-items: center;
   justify-content: center;
   font-size: 8px;
-  color: #656d76;
+  color: var(--vscode-text-secondary);
   transition: transform 0.15s ease;
   margin-right: 2px;
 }
@@ -208,7 +203,7 @@ function formatFileSize(bytes: number): string {
 
 .file-size {
   font-size: 11px;
-  color: #656d76;
+  color: var(--vscode-text-muted);
   margin-left: 8px;
   flex-shrink: 0;
 }
@@ -219,28 +214,5 @@ function formatFileSize(bytes: number): string {
 
 .children {
   margin-left: 0;
-}
-
-/* 深色主题支持 */
-@media (prefers-color-scheme: dark) {
-  .node-content {
-    color: #f0f6fc;
-  }
-
-  .node-content:hover {
-    background: #21262d;
-  }
-
-  .node-content.is-selected {
-    background: #1f6feb;
-  }
-
-  .expand-icon {
-    color: #8b949e;
-  }
-
-  .file-size {
-    color: #8b949e;
-  }
 }
 </style>

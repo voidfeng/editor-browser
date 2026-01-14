@@ -50,6 +50,7 @@
     "@tsconfig/node24": "^24.0.3",
     "@types/chrome": "^0.1.32",
     "@types/node": "^24.10.4",
+    "@unocss/reset": "^66.5.12",
     "@vitejs/plugin-vue": "^6.0.3",
     "@vue/eslint-config-prettier": "^10.2.0",
     "@vue/eslint-config-typescript": "^14.6.0",
@@ -62,6 +63,7 @@
     "oxlint": "~1.38.0",
     "prettier": "3.7.4",
     "typescript": "~5.9.3",
+    "unocss": "^66.5.12",
     "vite": "beta",
     "vite-plugin-vue-devtools": "^8.0.5",
     "vue-tsc": "^3.2.2"

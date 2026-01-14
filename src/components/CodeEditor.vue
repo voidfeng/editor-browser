@@ -12,7 +12,7 @@ import {
   closeBrackets,
   autocompletion,
   closeBracketsKeymap,
-  completionKeymap,
+  completionKeymap
 } from '@codemirror/autocomplete'
 import { javascript } from '@codemirror/lang-javascript'
 import { oneDark } from '@codemirror/theme-one-dark'
@@ -30,7 +30,7 @@ const props = withDefaults(defineProps<Props>(), {
   language: 'javascript',
   theme: 'light',
   readonly: false,
-  placeholder: '',
+  placeholder: ''
 })
 
 const emit = defineEmits<{
@@ -59,7 +59,7 @@ const basicExtensions: Extension[] = [
   bracketMatching(),
   closeBrackets(),
   autocompletion(),
-  keymap.of([...closeBracketsKeymap, ...defaultKeymap, ...historyKeymap, ...completionKeymap]),
+  keymap.of([...closeBracketsKeymap, ...defaultKeymap, ...historyKeymap, ...completionKeymap])
 ]
 
 // 创建编辑器状态
@@ -72,7 +72,7 @@ const createEditorState = () => {
         const newValue = update.state.doc.toString()
         emit('update:modelValue', newValue)
       }
-    }),
+    })
   ]
 
   // 添加主题
@@ -87,7 +87,7 @@ const createEditorState = () => {
 
   return EditorState.create({
     doc: props.modelValue,
-    extensions,
+    extensions
   })
 }
 
@@ -97,7 +97,7 @@ onMounted(() => {
 
   editorView = new EditorView({
     state: createEditorState(),
-    parent: editorRef.value,
+    parent: editorRef.value
   })
 })
 
@@ -115,11 +115,11 @@ watch(
         changes: {
           from: 0,
           to: editorView.state.doc.length,
-          insert: newValue,
-        },
+          insert: newValue
+        }
       })
     }
-  },
+  }
 )
 
 // 监听语言变化
@@ -130,7 +130,7 @@ watch(
       const newState = createEditorState()
       editorView.setState(newState)
     }
-  },
+  }
 )
 
 // 监听主题变化
@@ -141,22 +141,32 @@ watch(
       const newState = createEditorState()
       editorView.setState(newState)
     }
-  },
+  }
 )
 </script>
 
 <style scoped>
 .code-editor {
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  border: none;
   overflow: hidden;
+  background: var(--vscode-editor-bg);
 }
 
 .code-editor :deep(.cm-editor) {
   height: 100%;
+  background: var(--vscode-editor-bg);
 }
 
 .code-editor :deep(.cm-focused) {
   outline: none;
+}
+
+.code-editor :deep(.cm-gutters) {
+  background: var(--vscode-editor-bg);
+  border-right: 1px solid var(--vscode-border-primary);
+}
+
+.code-editor :deep(.cm-lineNumbers) {
+  color: var(--vscode-editor-line-number);
 }
 </style>

@@ -1,17 +1,33 @@
 <template>
-  <div class="file-explorer">
-    <div class="explorer-header">
-      <div class="explorer-title">
-        <span class="title-text">资源管理器</span>
-        <div class="header-actions">
-          <button class="action-btn" @click="refreshFiles" title="刷新">🔄</button>
-          <button class="action-btn" @click="toggleCollapse" title="折叠所有">📁</button>
+  <div class="file-explorer vscode-sidebar h-full flex flex-col">
+    <div
+      class="explorer-header bg-vscode-sidebar-header border-b border-vscode-sidebar-border px-3 py-2"
+    >
+      <div class="flex justify-between items-center">
+        <span class="text-xs font-semibold uppercase tracking-wide text-vscode-text-secondary">
+          资源管理器
+        </span>
+        <div class="flex gap-1">
+          <button
+            class="action-btn p-1 rounded text-vscode-text-secondary hover:bg-vscode-sidebar-hover transition-colors"
+            @click="refreshFiles"
+            title="刷新"
+          >
+            🔄
+          </button>
+          <button
+            class="action-btn p-1 rounded text-vscode-text-secondary hover:bg-vscode-sidebar-hover transition-colors"
+            @click="toggleCollapse"
+            title="折叠所有"
+          >
+            📁
+          </button>
         </div>
       </div>
     </div>
 
-    <div class="explorer-content">
-      <div class="file-tree">
+    <div class="explorer-content flex-1 overflow-y-auto vscode-scrollbar py-1">
+      <div class="file-tree select-none">
         <FileTreeNode
           v-for="item in fileTree"
           :key="item.path"
@@ -46,7 +62,6 @@ const emit = defineEmits<{
 const fileTree = ref<FileItem[]>([])
 const isLoading = ref(false)
 
-// 模拟文件系统数据 - 在实际应用中这应该从API获取
 const mockFileSystem: FileItem[] = [
   {
     name: 'src',
@@ -177,7 +192,6 @@ const mockFileSystem: FileItem[] = [
 
 function loadFiles() {
   isLoading.value = true
-  // 模拟异步加载
   setTimeout(() => {
     fileTree.value = mockFileSystem
     isLoading.value = false
@@ -217,80 +231,13 @@ onMounted(() => {
 
 <style scoped>
 .file-explorer {
-  height: 100%;
-  background: #f8f9fa;
-  border-right: 1px solid #e1e4e8;
-  display: flex;
-  flex-direction: column;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
-.explorer-header {
-  padding: 8px 12px;
-  background: #ffffff;
-  border-bottom: 1px solid #e1e4e8;
-  flex-shrink: 0;
-}
-
-.explorer-title {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.title-text {
-  font-size: 11px;
-  font-weight: 600;
-  color: #586069;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.header-actions {
-  display: flex;
-  gap: 4px;
-}
-
 .action-btn {
-  background: none;
-  border: none;
-  padding: 4px;
-  border-radius: 3px;
-  cursor: pointer;
   font-size: 12px;
-  color: #586069;
-  transition: background-color 0.15s ease;
-}
-
-.action-btn:hover {
-  background: #f1f3f4;
-}
-
-.explorer-content {
-  flex: 1;
-  overflow-y: auto;
-  padding: 4px 0;
-}
-
-.file-tree {
-  user-select: none;
-}
-
-/* 滚动条样式 */
-.explorer-content::-webkit-scrollbar {
-  width: 8px;
-}
-
-.explorer-content::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.explorer-content::-webkit-scrollbar-thumb {
-  background: #c1c7cd;
-  border-radius: 4px;
-}
-
-.explorer-content::-webkit-scrollbar-thumb:hover {
-  background: #a8b0b8;
+  border: none;
+  background: none;
+  cursor: pointer;
 }
 </style>

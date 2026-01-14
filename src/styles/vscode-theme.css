@@ -1,0 +1,227 @@
+/* VS Code Dark Theme - CSS Variables */
+:root {
+  /* ===== 主色调 ===== */
+  --vscode-bg-primary: #1e1e1e; /* 主背景色 */
+  --vscode-bg-secondary: #252526; /* 次要背景色 */
+  --vscode-bg-tertiary: #2d2d30; /* 第三级背景色 */
+
+  /* ===== 侧边栏 (Sidebar) ===== */
+  --vscode-sidebar-bg: #252526; /* 侧边栏背景 */
+  --vscode-sidebar-border: #1e1e1e; /* 侧边栏边框 */
+  --vscode-sidebar-header-bg: #252526; /* 侧边栏标题背景 */
+  --vscode-sidebar-item-hover: #2a2d2e; /* 侧边栏项悬停 */
+  --vscode-sidebar-item-active: #37373d; /* 侧边栏项激活 */
+
+  /* ===== 活动栏 (Activity Bar) - 最左侧图标栏 ===== */
+  --vscode-activitybar-bg: #333333; /* 活动栏背景 */
+  --vscode-activitybar-border: #1e1e1e; /* 活动栏边框 */
+  --vscode-activitybar-item-hover: #505050; /* 活动栏项悬停 */
+  --vscode-activitybar-item-active: #007acc; /* 活动栏项激活 */
+
+  /* ===== 编辑器区域 ===== */
+  --vscode-editor-bg: #1e1e1e; /* 编辑器背景 */
+  --vscode-editor-line-number: #858585; /* 行号颜色 */
+  --vscode-editor-selection: #264f78; /* 选中文本背景 */
+  --vscode-editor-cursor: #aeafad; /* 光标颜色 */
+
+  /* ===== 标签栏 (Tabs) ===== */
+  --vscode-tab-bg: #2d2d2d; /* 标签背景 */
+  --vscode-tab-active-bg: #1e1e1e; /* 激活标签背景 */
+  --vscode-tab-inactive-bg: #2d2d2d; /* 非激活标签背景 */
+  --vscode-tab-border: #252526; /* 标签边框 */
+  --vscode-tab-active-border: #007acc; /* 激活标签底部边框 */
+  --vscode-tab-hover-bg: #323233; /* 标签悬停背景 */
+
+  /* ===== 标题栏 (Title Bar) ===== */
+  --vscode-titlebar-bg: #3c3c3c; /* 标题栏背景 */
+  --vscode-titlebar-active-bg: #3c3c3c; /* 激活标题栏背景 */
+  --vscode-titlebar-inactive-bg: #2d2d2d; /* 非激活标题栏背景 */
+  --vscode-titlebar-border: #1e1e1e; /* 标题栏边框 */
+
+  /* ===== 状态栏 (Status Bar) ===== */
+  --vscode-statusbar-bg: #007acc; /* 状态栏背景 */
+  --vscode-statusbar-no-folder-bg: #68217a; /* 无文件夹状态栏背景 */
+  --vscode-statusbar-debug-bg: #cc6633; /* 调试模式状态栏背景 */
+  --vscode-statusbar-border: #1e1e1e; /* 状态栏边框 */
+  --vscode-statusbar-item-hover: #005a9e; /* 状态栏项悬停 */
+
+  /* ===== 工具栏 (Toolbar) ===== */
+  --vscode-toolbar-bg: #2d2d2d; /* 工具栏背景 */
+  --vscode-toolbar-border: #1e1e1e; /* 工具栏边框 */
+
+  /* ===== 文本颜色 ===== */
+  --vscode-text-primary: #cccccc; /* 主要文本 */
+  --vscode-text-secondary: #969696; /* 次要文本 */
+  --vscode-text-muted: #6a6a6a; /* 弱化文本 */
+  --vscode-text-link: #3794ff; /* 链接文本 */
+  --vscode-text-active: #ffffff; /* 激活文本 */
+
+  /* ===== 按钮 ===== */
+  --vscode-button-bg: #0e639c; /* 按钮背景 */
+  --vscode-button-hover-bg: #1177bb; /* 按钮悬停背景 */
+  --vscode-button-active-bg: #005a9e; /* 按钮激活背景 */
+  --vscode-button-secondary-bg: #3a3d41; /* 次要按钮背景 */
+  --vscode-button-secondary-hover: #45494e; /* 次要按钮悬停 */
+
+  /* ===== 输入框 ===== */
+  --vscode-input-bg: #3c3c3c; /* 输入框背景 */
+  --vscode-input-border: #3c3c3c; /* 输入框边框 */
+  --vscode-input-focus-border: #007acc; /* 输入框聚焦边框 */
+  --vscode-input-placeholder: #6a6a6a; /* 输入框占位符 */
+
+  /* ===== 下拉菜单 ===== */
+  --vscode-dropdown-bg: #3c3c3c; /* 下拉菜单背景 */
+  --vscode-dropdown-border: #3c3c3c; /* 下拉菜单边框 */
+  --vscode-dropdown-hover-bg: #2a2d2e; /* 下拉菜单悬停 */
+
+  /* ===== 滚动条 ===== */
+  --vscode-scrollbar-bg: transparent; /* 滚动条背景 */
+  --vscode-scrollbar-thumb: #424242; /* 滚动条滑块 */
+  --vscode-scrollbar-thumb-hover: #4f4f4f; /* 滚动条滑块悬停 */
+
+  /* ===== 边框和分隔线 ===== */
+  --vscode-border-primary: #1e1e1e; /* 主要边框 */
+  --vscode-border-secondary: #2d2d2d; /* 次要边框 */
+  --vscode-divider: #454545; /* 分隔线 */
+
+  /* ===== 高亮和焦点 ===== */
+  --vscode-focus-border: #007acc; /* 焦点边框 */
+  --vscode-selection-bg: #264f78; /* 选中背景 */
+  --vscode-hover-bg: #2a2d2e; /* 悬停背景 */
+
+  /* ===== 语义颜色 ===== */
+  --vscode-success: #89d185; /* 成功色 */
+  --vscode-warning: #cca700; /* 警告色 */
+  --vscode-error: #f48771; /* 错误色 */
+  --vscode-info: #75beff; /* 信息色 */
+
+  /* ===== 阴影 ===== */
+  --vscode-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.36);
+  --vscode-shadow-md: 0 4px 16px rgba(0, 0, 0, 0.48);
+  --vscode-shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.64);
+
+  /* ===== 面板 (Panel) - 底部终端/输出区域 ===== */
+  --vscode-panel-bg: #1e1e1e; /* 面板背景 */
+  --vscode-panel-border: #2d2d2d; /* 面板边框 */
+  --vscode-panel-header-bg: #252526; /* 面板标题背景 */
+
+  /* ===== 通知 (Notifications) ===== */
+  --vscode-notification-bg: #252526; /* 通知背景 */
+  --vscode-notification-border: #454545; /* 通知边框 */
+
+  /* ===== 徽章 (Badge) ===== */
+  --vscode-badge-bg: #4d4d4d; /* 徽章背景 */
+  --vscode-badge-text: #ffffff; /* 徽章文本 */
+
+  /* ===== 进度条 ===== */
+  --vscode-progress-bg: #007acc; /* 进度条背景 */
+
+  /* ===== 列表项 ===== */
+  --vscode-list-hover-bg: #2a2d2e; /* 列表项悬停 */
+  --vscode-list-active-bg: #094771; /* 列表项激活 */
+  --vscode-list-focus-bg: #062f4a; /* 列表项聚焦 */
+  --vscode-list-inactive-selection: #37373d; /* 列表项非激活选中 */
+}
+
+/* 浅色主题变量（可选） */
+:root[data-theme='light'] {
+  --vscode-bg-primary: #ffffff;
+  --vscode-bg-secondary: #f3f3f3;
+  --vscode-bg-tertiary: #e8e8e8;
+
+  --vscode-sidebar-bg: #f3f3f3;
+  --vscode-sidebar-border: #e5e5e5;
+  --vscode-sidebar-header-bg: #f3f3f3;
+  --vscode-sidebar-item-hover: #e8e8e8;
+  --vscode-sidebar-item-active: #e4e6f1;
+
+  --vscode-activitybar-bg: #2c2c2c;
+  --vscode-activitybar-border: #2c2c2c;
+  --vscode-activitybar-item-hover: #3e3e3e;
+  --vscode-activitybar-item-active: #007acc;
+
+  --vscode-editor-bg: #ffffff;
+  --vscode-editor-line-number: #237893;
+  --vscode-editor-selection: #add6ff;
+  --vscode-editor-cursor: #000000;
+
+  --vscode-tab-bg: #ececec;
+  --vscode-tab-active-bg: #ffffff;
+  --vscode-tab-inactive-bg: #ececec;
+  --vscode-tab-border: #e5e5e5;
+  --vscode-tab-active-border: #007acc;
+  --vscode-tab-hover-bg: #e8e8e8;
+
+  --vscode-titlebar-bg: #dddddd;
+  --vscode-titlebar-active-bg: #dddddd;
+  --vscode-titlebar-inactive-bg: #ececec;
+  --vscode-titlebar-border: #e5e5e5;
+
+  --vscode-statusbar-bg: #007acc;
+  --vscode-statusbar-no-folder-bg: #68217a;
+  --vscode-statusbar-debug-bg: #cc6633;
+  --vscode-statusbar-border: #e5e5e5;
+  --vscode-statusbar-item-hover: #005a9e;
+
+  --vscode-toolbar-bg: #f3f3f3;
+  --vscode-toolbar-border: #e5e5e5;
+
+  --vscode-text-primary: #000000;
+  --vscode-text-secondary: #616161;
+  --vscode-text-muted: #8e8e8e;
+  --vscode-text-link: #006ab1;
+  --vscode-text-active: #000000;
+
+  --vscode-button-bg: #007acc;
+  --vscode-button-hover-bg: #005a9e;
+  --vscode-button-active-bg: #004578;
+  --vscode-button-secondary-bg: #e8e8e8;
+  --vscode-button-secondary-hover: #d8d8d8;
+
+  --vscode-input-bg: #ffffff;
+  --vscode-input-border: #cecece;
+  --vscode-input-focus-border: #007acc;
+  --vscode-input-placeholder: #8e8e8e;
+
+  --vscode-dropdown-bg: #ffffff;
+  --vscode-dropdown-border: #cecece;
+  --vscode-dropdown-hover-bg: #f3f3f3;
+
+  --vscode-scrollbar-bg: transparent;
+  --vscode-scrollbar-thumb: #c4c4c4;
+  --vscode-scrollbar-thumb-hover: #a6a6a6;
+
+  --vscode-border-primary: #e5e5e5;
+  --vscode-border-secondary: #ececec;
+  --vscode-divider: #d4d4d4;
+
+  --vscode-focus-border: #007acc;
+  --vscode-selection-bg: #add6ff;
+  --vscode-hover-bg: #f3f3f3;
+
+  --vscode-success: #388a34;
+  --vscode-warning: #bf8803;
+  --vscode-error: #e51400;
+  --vscode-info: #1a85ff;
+
+  --vscode-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.16);
+  --vscode-shadow-md: 0 4px 16px rgba(0, 0, 0, 0.24);
+  --vscode-shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.32);
+
+  --vscode-panel-bg: #ffffff;
+  --vscode-panel-border: #e5e5e5;
+  --vscode-panel-header-bg: #f3f3f3;
+
+  --vscode-notification-bg: #f3f3f3;
+  --vscode-notification-border: #d4d4d4;
+
+  --vscode-badge-bg: #c4c4c4;
+  --vscode-badge-text: #000000;
+
+  --vscode-progress-bg: #007acc;
+
+  --vscode-list-hover-bg: #f3f3f3;
+  --vscode-list-active-bg: #e4e6f1;
+  --vscode-list-focus-bg: #d4d7e8;
+  --vscode-list-inactive-selection: #e8e8e8;
+}
