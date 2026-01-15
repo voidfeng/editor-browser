@@ -131,14 +131,16 @@ function formatFileSize(bytes: number): string {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+@import '@/styles/variables.scss';
+@import '@/styles/mixins.scss';
+
 .tree-node {
   font-size: 13px;
 }
 
 .node-content {
-  display: flex;
-  align-items: center;
+  @include flex(row, center, flex-start);
   height: 22px;
   cursor: pointer;
   color: var(--vscode-text-primary);
@@ -146,36 +148,40 @@ function formatFileSize(bytes: number): string {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  transition: background-color 0.1s ease;
-}
+  @include transition(background-color);
+  transition-duration: 0.1s;
 
-.node-content:hover {
-  background: var(--vscode-list-hover-bg);
-}
+  &:hover {
+    background: var(--vscode-list-hover-bg);
+  }
 
-.node-content.is-selected {
-  background: var(--vscode-list-active-bg);
-  color: var(--vscode-text-active);
-}
+  &.is-selected {
+    background: var(--vscode-list-active-bg);
+    color: var(--vscode-text-active);
 
-.node-content.is-folder {
-  font-weight: 500;
+    .file-size {
+      color: rgba(255, 255, 255, 0.8);
+    }
+  }
+
+  &.is-folder {
+    font-weight: 500;
+  }
 }
 
 .expand-icon {
   width: 16px;
   height: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include flex-center;
   font-size: 8px;
   color: var(--vscode-text-secondary);
-  transition: transform 0.15s ease;
+  @include transition(transform);
+  transition-duration: 0.15s;
   margin-right: 2px;
-}
 
-.expand-icon.expanded {
-  transform: rotate(90deg);
+  &.expanded {
+    transform: rotate(90deg);
+  }
 }
 
 .file-indent {
@@ -186,10 +192,8 @@ function formatFileSize(bytes: number): string {
 .file-icon {
   width: 16px;
   height: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 12px;
+  @include flex-center;
+  font-size: $font-size-xs;
   margin-right: 6px;
   flex-shrink: 0;
 }
@@ -197,19 +201,14 @@ function formatFileSize(bytes: number): string {
 .file-name {
   flex: 1;
   min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  @include text-ellipsis(1);
 }
 
 .file-size {
   font-size: 11px;
   color: var(--vscode-text-muted);
-  margin-left: 8px;
+  margin-left: $spacing-sm;
   flex-shrink: 0;
-}
-
-.node-content.is-selected .file-size {
-  color: rgba(255, 255, 255, 0.8);
 }
 
 .children {

@@ -490,16 +490,16 @@ onUnmounted(() => {
 })
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .floating-editor-wrapper {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 .editor-panel {
   cursor: default;
-}
 
-.editor-panel.minimized {
-  cursor: move;
+  &.minimized {
+    cursor: move;
+  }
 }
 </style>

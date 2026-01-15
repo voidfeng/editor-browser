@@ -9,7 +9,7 @@ import 'virtual:uno.css'
 import '@unocss/reset/tailwind.css'
 
 // VS Code Theme
-import './styles/vscode-theme.css'
+import './styles/vscode-theme.scss'
 
 const app = createApp(App)
 

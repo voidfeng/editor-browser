@@ -107,8 +107,10 @@ defineEmits<{
 }>()
 </script>
 
-<style scoped>
-.control-btn:hover {
-  background: rgba(255, 255, 255, 0.3) !important;
+<style scoped lang="scss">
+.control-btn {
+  &:hover {
+    background: rgba(255, 255, 255, 0.3) !important;
+  }
 }
 </style>

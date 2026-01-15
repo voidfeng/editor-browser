@@ -49,7 +49,10 @@ if (typeof chrome !== 'undefined' && chrome.tabs) {
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
+@import '@/styles/variables.scss';
+@import '@/styles/mixins.scss';
+
 .popup-container {
   width: 500px;
   min-height: 400px;
@@ -59,49 +62,49 @@ if (typeof chrome !== 'undefined' && chrome.tabs) {
 .popup-header {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
-  padding: 16px;
+  padding: $spacing-md;
   text-align: center;
-}
 
-.popup-header h1 {
-  margin: 0;
-  font-size: 18px;
-  font-weight: 600;
+  h1 {
+    margin: 0;
+    font-size: $font-size-lg;
+    font-weight: 600;
+  }
 }
 
 .popup-content {
-  padding: 16px;
+  padding: $spacing-md;
 }
 
 .greeting {
-  margin-bottom: 16px;
+  margin-bottom: $spacing-md;
 }
 
 .current-page {
-  margin-bottom: 16px;
-  padding: 12px;
+  margin-bottom: $spacing-md;
+  padding: $spacing-sm + 4px;
   background: #f8f9fa;
-  border-radius: 8px;
+  border-radius: $border-radius-lg;
+
+  h3 {
+    margin: 0 0 $spacing-sm 0;
+    font-size: $font-size-sm;
+    color: #495057;
+  }
 }
 
 .editor-section {
-  margin-bottom: 16px;
-}
+  margin-bottom: $spacing-md;
 
-.editor-section h3 {
-  margin: 0 0 8px 0;
-  font-size: 14px;
-  color: #495057;
-}
-
-.current-page h3 {
-  margin: 0 0 8px 0;
-  font-size: 14px;
-  color: #495057;
+  h3 {
+    margin: 0 0 $spacing-sm 0;
+    font-size: $font-size-sm;
+    color: #495057;
+  }
 }
 
 .url {
-  font-size: 12px;
+  font-size: $font-size-xs;
   color: #6c757d;
   word-break: break-all;
   margin: 0;
@@ -112,21 +115,21 @@ if (typeof chrome !== 'undefined' && chrome.tabs) {
 }
 
 .btn {
-  padding: 8px 16px;
+  padding: $spacing-sm $spacing-md;
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  font-size: 14px;
-  transition: all 0.2s;
-}
+  font-size: $font-size-sm;
+  @include transition(all);
 
-.btn-primary {
-  background: #007bff;
-  color: white;
-}
+  &-primary {
+    background: #007bff;
+    color: white;
 
-.btn-primary:hover {
-  background: #0056b3;
-  transform: translateY(-1px);
+    &:hover {
+      background: #0056b3;
+      transform: translateY(-1px);
+    }
+  }
 }
 </style>

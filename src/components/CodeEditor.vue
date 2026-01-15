@@ -145,28 +145,28 @@ watch(
 )
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .code-editor {
   border: none;
   overflow: hidden;
   background: var(--vscode-editor-bg);
-}
 
-.code-editor :deep(.cm-editor) {
-  height: 100%;
-  background: var(--vscode-editor-bg);
-}
+  :deep(.cm-editor) {
+    height: 100%;
+    background: var(--vscode-editor-bg);
+  }
 
-.code-editor :deep(.cm-focused) {
-  outline: none;
-}
+  :deep(.cm-focused) {
+    outline: none;
+  }
 
-.code-editor :deep(.cm-gutters) {
-  background: var(--vscode-editor-bg);
-  border-right: 1px solid var(--vscode-border-primary);
-}
+  :deep(.cm-gutters) {
+    background: var(--vscode-editor-bg);
+    border-right: 1px solid var(--vscode-border-primary);
+  }
 
-.code-editor :deep(.cm-lineNumbers) {
-  color: var(--vscode-editor-line-number);
+  :deep(.cm-lineNumbers) {
+    color: var(--vscode-editor-line-number);
+  }
 }
 </style>

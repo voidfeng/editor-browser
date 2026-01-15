@@ -229,13 +229,15 @@ onMounted(() => {
 })
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+@import '@/styles/variables.scss';
+
 .file-explorer {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 .action-btn {
-  font-size: 12px;
+  font-size: $font-size-xs;
   border: none;
   background: none;
   cursor: pointer;

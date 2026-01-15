@@ -6,7 +6,7 @@ import 'virtual:uno.css'
 import '@unocss/reset/tailwind.css'
 
 // VS Code Theme
-import './styles/vscode-theme.css'
+import './styles/vscode-theme.scss'
 
 // 创建编辑器容器
 function createEditorContainer() {

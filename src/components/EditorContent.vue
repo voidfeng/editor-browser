@@ -107,8 +107,10 @@ function getFileIcon(file: FileItem): string {
 }
 </script>
 
-<style scoped>
-.vscode-tab:hover button {
-  opacity: 1;
+<style scoped lang="scss">
+.vscode-tab {
+  &:hover button {
+    opacity: 1;
+  }
 }
 </style>

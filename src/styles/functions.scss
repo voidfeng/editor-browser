@@ -1,0 +1,26 @@
+// SCSS 函数
+// 可复用的计算函数
+
+// 将 px 转换为 rem
+@function px-to-rem($px, $base: 16px) {
+  @return calc($px / $base) * 1rem;
+}
+
+// 计算对比色（用于确保文本可读性）
+@function contrast-color($color, $light: #fff, $dark: #000) {
+  @if (lightness($color) > 50) {
+    @return $dark;
+  } @else {
+    @return $light;
+  }
+}
+
+// 颜色透明度
+@function alpha($color, $opacity) {
+  @return rgba($color, $opacity);
+}
+
+// 间距计算（基于基础单位）
+@function spacing($multiplier, $base: 8px) {
+  @return $base * $multiplier;
+}
