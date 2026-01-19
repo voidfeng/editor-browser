@@ -44,6 +44,8 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import FileTreeNode from './FileTreeNode.vue'
+import { extractCurrentList, isProcessorAvailable } from '@/utils/processors'
+import { insertListIntoFileTree } from '@/utils/listToFileTree'
 
 export interface FileItem {
   name: string
@@ -53,6 +55,7 @@ export interface FileItem {
   isExpanded?: boolean
   size?: number
   lastModified?: Date
+  meta?: Record<string, any> // 添加 meta 字段用于存储额外信息
 }
 
 const emit = defineEmits<{
@@ -190,16 +193,31 @@ const mockFileSystem: FileItem[] = [
   }
 ]
 
-function loadFiles() {
+async function loadFiles() {
   isLoading.value = true
-  setTimeout(() => {
-    fileTree.value = mockFileSystem
-    isLoading.value = false
-  }, 300)
+
+  // 加载基础文件系统
+  fileTree.value = mockFileSystem
+
+  // 尝试加载当前页面的列表数据
+  try {
+    const hasProcessor = isProcessorAvailable()
+    if (hasProcessor) {
+      const listItems = await extractCurrentList()
+      if (listItems.length > 0) {
+        fileTree.value = insertListIntoFileTree(fileTree.value, listItems)
+        console.log(`✅ 已加载 ${listItems.length} 个列表项`)
+      }
+    }
+  } catch (error) {
+    console.error('加载列表数据失败:', error)
+  }
+
+  isLoading.value = false
 }
 
-function refreshFiles() {
-  loadFiles()
+async function refreshFiles() {
+  await loadFiles()
 }
 
 function toggleCollapse() {

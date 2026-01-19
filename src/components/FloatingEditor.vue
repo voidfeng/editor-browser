@@ -82,6 +82,7 @@ import { ref, onMounted, onUnmounted } from 'vue'
 import EditorHeader from './EditorHeader.vue'
 import EditorSidebar from './EditorSidebar.vue'
 import EditorContent from './EditorContent.vue'
+import { extractCurrentArticle } from '@/utils/processors'
 import type { FileItem } from './FileExplorer.vue'
 
 // 编辑器状态
@@ -153,7 +154,7 @@ function toggleSidebar() {
 }
 
 // ========== 文件管理 ==========
-function onFileSelect(file: FileItem) {
+async function onFileSelect(file: FileItem) {
   if (file.type === 'file') {
     // 检查文件是否已打开
     const existingFile = openFiles.value.find((f) => f.path === file.path)
@@ -164,36 +165,86 @@ function onFileSelect(file: FileItem) {
     // 切换到该文件
     switchToFile(file)
 
-    // 根据文件扩展名设置语言
-    const ext = file.name.split('.').pop()?.toLowerCase()
-    switch (ext) {
-      case 'js':
-      case 'jsx':
-      case 'ts':
-      case 'tsx':
-        currentLanguage.value = 'javascript'
-        break
-      case 'html':
-        currentLanguage.value = 'html'
-        break
-      case 'css':
-      case 'scss':
-      case 'sass':
-        currentLanguage.value = 'css'
-        break
-      case 'json':
-        currentLanguage.value = 'json'
-        break
-      case 'md':
-      case 'markdown':
-        currentLanguage.value = 'markdown'
-        break
-      default:
-        currentLanguage.value = 'javascript'
+    // 检查是否是列表文件
+    if (file.path.startsWith('list/') && file.meta?.url) {
+      // 列表文件，加载文章内容
+      await loadArticleFromUrl(file)
+      currentLanguage.value = 'html'
+    } else {
+      // 普通文件，根据扩展名设置语言
+      const ext = file.name.split('.').pop()?.toLowerCase()
+      switch (ext) {
+        case 'js':
+        case 'jsx':
+        case 'ts':
+        case 'tsx':
+          currentLanguage.value = 'javascript'
+          break
+        case 'html':
+          currentLanguage.value = 'html'
+          break
+        case 'css':
+        case 'scss':
+        case 'sass':
+          currentLanguage.value = 'css'
+          break
+        case 'json':
+          currentLanguage.value = 'json'
+          break
+        case 'md':
+        case 'markdown':
+          currentLanguage.value = 'markdown'
+          break
+        default:
+          currentLanguage.value = 'javascript'
+      }
+
+      // 加载文件内容
+      loadFileContent(file)
+    }
+  }
+}
+
+async function loadArticleFromUrl(file: FileItem) {
+  try {
+    code.value = '// 正在加载文章内容...'
+
+    // 获取文章 URL
+    const articleUrl = file.meta?.url
+
+    if (!articleUrl) {
+      code.value = '// 错误：无法获取文章 URL'
+      return
     }
 
-    // 加载文件内容
-    loadFileContent(file)
+    // 提取文章内容
+    const article = await extractCurrentArticle()
+
+    if (article) {
+      // 显示文章内容
+      code.value = `<!--
+标题: ${article.title}
+作者: ${article.author || '未知'}
+日期: ${article.date || '未知'}
+标签: ${article.tags?.join(', ') || '无'}
+URL: ${file.meta?.url}
+-->
+
+${article.content}`
+    } else {
+      code.value = `<!--
+标题: ${file.name}
+URL: ${file.meta?.url}
+作者: ${file.meta?.author || '未知'}
+摘要: ${file.meta?.excerpt || '无'}
+-->
+
+<!-- 无法提取文章内容，请访问原网页查看 -->
+<p>请访问原网页: <a href="${file.meta?.url}" target="_blank">${file.meta?.url}</a></p>`
+    }
+  } catch (error) {
+    code.value = `// 加载文章失败: ${error}`
+    console.error('加载文章失败:', error)
   }
 }
 
