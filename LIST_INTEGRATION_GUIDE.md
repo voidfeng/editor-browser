@@ -13,16 +13,31 @@
 1. 检查当前网站是否有对应的处理器
 2. 如果有，自动提取页面列表数据
 3. 将列表项转换为文件树节点
-4. 插入到 `src` 文件夹下方，显示为 `📋 网页列表` 文件夹
+4. 插入到 `src` 文件夹下方，显示为 `📋 pages` 文件夹
 
 ### 2. 查看文章内容
 
 点击列表项文件时：
 
-1. 系统会使用处理器提取文章内容
-2. 使用 metascraper 获取元数据（标题、作者、日期等）
-3. 在编辑器中显示完整的文章 HTML 内容
-4. 语言模式自动切换为 HTML
+1. 系统会发送 GET 请求获取文章页面的 HTML
+2. 使用处理器从 HTML 中提取文章内容
+3. 使用 DOM 解析器提取元数据（标题、作者、日期等）
+4. 在编辑器中显示完整的文章 HTML 内容
+5. 语言模式自动切换为 HTML
+
+**技术实现：**
+
+- 使用 Chrome Extension 的 **Background Service Worker** 发起跨域请求
+- Content Script 通过 `chrome.runtime.sendMessage()` 与 Background 通信
+- Background Script 使用 `fetch()` API 获取页面内容（不受 CORS 限制）
+- 使用浏览器原生 `DOMParser` 解析 HTML 和提取元数据
+- 调用 `extractArticleFromHtml(html, url)` 从 HTML 字符串中提取文章
+- 支持从任意 URL 加载内容，绕过同源策略限制
+
+**权限要求：**
+
+- `host_permissions: ['<all_urls>']` - 允许访问所有网站
+- `background.service_worker` - 后台服务工作线程
 
 ## 使用示例
 
@@ -34,7 +49,7 @@
 
 ```
 📁 src
-📁 📋 网页列表
+📁 📋 pages
   📄 帖子标题 1
   📄 帖子标题 2
   📄 帖子标题 3

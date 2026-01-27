@@ -82,7 +82,9 @@ import { ref, onMounted, onUnmounted } from 'vue'
 import EditorHeader from './EditorHeader.vue'
 import EditorSidebar from './EditorSidebar.vue'
 import EditorContent from './EditorContent.vue'
-import { extractCurrentArticle } from '@/utils/processors'
+import { extractArticleFromHtml } from '@/utils/processors'
+import { fetchUrl } from '@/utils/fetchUrl'
+import { htmlToText } from '@/utils/htmlToText'
 import type { FileItem } from './FileExplorer.vue'
 
 // 编辑器状态
@@ -169,7 +171,7 @@ async function onFileSelect(file: FileItem) {
     if (file.path.startsWith('list/') && file.meta?.url) {
       // 列表文件，加载文章内容
       await loadArticleFromUrl(file)
-      currentLanguage.value = 'html'
+      currentLanguage.value = 'markdown'
     } else {
       // 普通文件，根据扩展名设置语言
       const ext = file.name.split('.').pop()?.toLowerCase()
@@ -217,33 +219,51 @@ async function loadArticleFromUrl(file: FileItem) {
       return
     }
 
-    // 提取文章内容
-    const article = await extractCurrentArticle()
+    // 通过 background script 发起跨域请求
+    const html = await fetchUrl(articleUrl)
+
+    // 使用处理器提取文章内容
+    const article = await extractArticleFromHtml(html, articleUrl)
 
     if (article) {
+      // 将 HTML 转换为格式化的文本
+      const textContent = htmlToText(article.content)
+
       // 显示文章内容
-      code.value = `<!--
-标题: ${article.title}
+      code.value = `标题: ${article.title}
 作者: ${article.author || '未知'}
 日期: ${article.date || '未知'}
 标签: ${article.tags?.join(', ') || '无'}
 URL: ${file.meta?.url}
--->
 
-${article.content}`
+${'='.repeat(60)}
+
+${textContent}
+
+${'='.repeat(60)}
+
+原文链接: ${file.meta?.url}`
     } else {
-      code.value = `<!--
-标题: ${file.name}
+      code.value = `标题: ${file.name}
 URL: ${file.meta?.url}
 作者: ${file.meta?.author || '未知'}
 摘要: ${file.meta?.excerpt || '无'}
--->
 
-<!-- 无法提取文章内容，请访问原网页查看 -->
-<p>请访问原网页: <a href="${file.meta?.url}" target="_blank">${file.meta?.url}</a></p>`
+${'='.repeat(60)}
+
+无法提取文章内容，请访问原网页查看
+
+原文链接: ${file.meta?.url}`
     }
   } catch (error) {
-    code.value = `// 加载文章失败: ${error}`
+    code.value = `// 加载文章失败: ${error}
+//
+// 可能的原因：
+// 1. 网络连接问题
+// 2. 目标网站拒绝访问
+// 3. URL 格式不正确
+//
+// 原始 URL: ${file.meta?.url}`
     console.error('加载文章失败:', error)
   }
 }

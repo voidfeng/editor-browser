@@ -2,22 +2,7 @@
  * V2EX 网站页面处理器
  */
 
-import metascraper from 'metascraper'
-import metascraperAuthor from 'metascraper-author'
-import metascraperDate from 'metascraper-date'
-import metascraperDescription from 'metascraper-description'
-import metascraperTitle from 'metascraper-title'
-import metascraperUrl from 'metascraper-url'
 import type { ListItem, ArticleContent } from './types'
-
-// 初始化 metascraper
-const scraper = metascraper([
-  metascraperAuthor(),
-  metascraperDate(),
-  metascraperDescription(),
-  metascraperTitle(),
-  metascraperUrl()
-])
 
 // 配置
 const config = {
@@ -64,32 +49,50 @@ export function extractList(doc: Document = document): ListItem[] {
 }
 
 /**
- * 提取文章内容（使用 metascraper）
+ * 提取文章内容（使用 DOM 解析）
  */
 export async function extractArticle(html?: string, url?: string): Promise<ArticleContent | null> {
   const pageHtml = html || document.documentElement.outerHTML
   const pageUrl = url || window.location.href
 
-  // 使用 metascraper 提取元数据
-  const metadata = await scraper({ html: pageHtml, url: pageUrl })
+  // 解析 HTML
+  const doc = html ? new DOMParser().parseFromString(html, 'text/html') : document
 
   // 提取正文内容
-  const doc = html ? new DOMParser().parseFromString(html, 'text/html') : document
   const contentEl = doc.querySelector(config.contentSelector)
-  const nodeEl = doc.querySelector('.header .gray a[href^="/go/"]')
-
   if (!contentEl) return null
 
+  // 提取元数据
+  const titleEl = doc.querySelector('.header h1, h1')
+  const authorEl = doc.querySelector('.header .gray a:first-child, .topic_info strong a')
+  const nodeEl = doc.querySelector('.header .gray a[href^="/go/"]')
+  const dateEl = doc.querySelector('.header .gray, .topic_info')
+
+  // 提取日期（从文本中解析）
+  let date: string | undefined
+  if (dateEl) {
+    const dateText = dateEl.textContent || ''
+    const dateMatch = dateText.match(/\d{4}-\d{2}-\d{2}|\d+\s+(分钟|小时|天)前/)
+    date = dateMatch ? dateMatch[0] : undefined
+  }
+
+  // 提取描述（使用 meta 标签或正文前 200 字符）
+  let description = doc.querySelector('meta[name="description"]')?.getAttribute('content')
+  if (!description) {
+    const textContent = contentEl.textContent?.trim() || ''
+    description = textContent.substring(0, 200) + (textContent.length > 200 ? '...' : '')
+  }
+
   return {
-    title: metadata.title || '',
-    author: metadata.author,
-    date: metadata.date,
+    title: titleEl?.textContent?.trim() || doc.title || '',
+    author: authorEl?.textContent?.trim(),
+    date,
     content: contentEl.innerHTML || '',
     tags: nodeEl ? [nodeEl.textContent?.trim() || ''] : [],
     meta: {
       node: nodeEl?.textContent?.trim(),
-      description: metadata.description,
-      url: metadata.url
+      description,
+      url: pageUrl
     }
   }
 }

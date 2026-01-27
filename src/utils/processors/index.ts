@@ -93,6 +93,36 @@ export async function extractCurrentArticle(): Promise<ArticleContent | null> {
 }
 
 /**
+ * 从 HTML 字符串中提取文章内容
+ */
+export async function extractArticleFromHtml(
+  html: string,
+  url: string
+): Promise<ArticleContent | null> {
+  // 从 URL 获取域名，找到对应的处理器
+  const domain = extractDomain(url)
+  const processorName = domainMap[domain]
+
+  if (!processorName) {
+    console.warn('No processor available for domain:', domain)
+    return null
+  }
+
+  const processor = processors[processorName]
+  if (!processor || !processor.extractArticle) {
+    console.warn('No article extractor available for processor:', processorName)
+    return null
+  }
+
+  try {
+    return await processor.extractArticle(html, url)
+  } catch (error) {
+    console.error('Error extracting article from HTML:', error)
+    return null
+  }
+}
+
+/**
  * 检查当前页面是否支持处理器
  */
 export function isProcessorAvailable(): boolean {

@@ -34,7 +34,7 @@ export function insertListIntoFileTree(fileTree: FileItem[], listItems: ListItem
 
   // 创建列表文件夹
   const listFolder: FileItem = {
-    name: '📋 网页列表',
+    name: 'pages',
     path: 'list',
     type: 'folder',
     isExpanded: true,
@@ -48,7 +48,7 @@ export function insertListIntoFileTree(fileTree: FileItem[], listItems: ListItem
   const newFileTree = [...fileTree]
 
   // 移除旧的列表文件夹（如果存在）
-  const oldListIndex = newFileTree.findIndex((item) => item.name === '📋 网页列表')
+  const oldListIndex = newFileTree.findIndex((item) => item.name === '📋 pages')
   if (oldListIndex > -1) {
     newFileTree.splice(oldListIndex, 1)
   }
@@ -68,5 +68,5 @@ export function insertListIntoFileTree(fileTree: FileItem[], listItems: ListItem
  * 从文件树中移除列表文件夹
  */
 export function removeListFromFileTree(fileTree: FileItem[]): FileItem[] {
-  return fileTree.filter((item) => item.name !== '📋 网页列表')
+  return fileTree.filter((item) => item.name !== '📋 pages')
 }
